@@ -10,6 +10,8 @@ export class AuthorizeGuard implements CanActivate {
 
   constructor(private authorizationService: AuthorizationService, private router: Router) {
 
+    // in a real-world scenario, it's not the responsibility of the auth guard to redirect after authenticating,
+    // this is just to make the app work
     this.authorizationService.hasAuthenticated.subscribe(hasAuthenticated => {
       if(hasAuthenticated)
         this.router.navigate(['']);
@@ -22,7 +24,7 @@ export class AuthorizeGuard implements CanActivate {
 
     let isAuthenticated = this.authorizationService.isAuthenticated();
 
-    // in a real-world senario, this would redirect to a login page instead, for example
+    // in a real-world scenario, this would redirect to a login page instead
     if(!isAuthenticated)
       this.authorizationService.authenticate();
 

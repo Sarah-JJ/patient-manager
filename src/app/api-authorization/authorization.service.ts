@@ -32,8 +32,7 @@ export class AuthorizationService {
     });
   }
 
-  async authenticate(): Promise<void> {
-
+  authenticate(): void {
     this.requestAuthorizationCode().subscribe({
       error: error => {
 
