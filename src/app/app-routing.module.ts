@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {AuthorizeGuard} from "./api-authorization/authorize.guard";
+import {AppComponent} from "./app.component";
 
 const routes: Routes = [
   {
@@ -15,9 +17,13 @@ const routes: Routes = [
         component: PageNotFoundComponent
       }
     ],
+    component: AppComponent
+  },
+  { path: '',
+    pathMatch: 'full' ,
+    canActivate: [AuthorizeGuard],
     component: PageNotFoundComponent
   },
-  { path: '',   redirectTo: '/patients', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

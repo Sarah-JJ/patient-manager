@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrlScheme: 'https://',
+  apiUrlHost: 'clare.oceaninformatics.com',
+  authRequestToken: 'RmFjZWJvb2svMTg0NjU4NjM0Nzo='
 };
 
 /*
