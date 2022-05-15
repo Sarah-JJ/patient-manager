@@ -34,10 +34,8 @@ export class AuthorizationService {
 
   async authenticate(): Promise<void> {
 
-    this.requestAuthorizationCode().subscribe(res => {
-
-    },
-      error => {
+    this.requestAuthorizationCode().subscribe({
+      error: error => {
 
         const authCode = error.url.split('code=')[1].split('&')[0];
 
@@ -69,7 +67,8 @@ export class AuthorizationService {
           });
 
         this.hasAuthenticated.next(true);
-      })
+      }
+    });
   }
 
   getAccessToken(): AccessToken | null {
