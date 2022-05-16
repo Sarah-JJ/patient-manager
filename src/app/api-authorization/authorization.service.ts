@@ -38,8 +38,6 @@ export class AuthorizationService {
 
         const authCode = error.url.split('code=')[1].split('&')[0];
 
-        console.log(authCode)
-
         const path = '/npscdrb2b/authorisation/oauth2/token';
 
         const headers = new HttpHeaders({
@@ -56,13 +54,12 @@ export class AuthorizationService {
         body.set('state', '30fb55af4834416aaa2c2d4de27bfcfd');
         body.set('code', authCode);
 
-
         this.http.post(environment.apiUrlScheme + environment.apiUrlHost + path,
           body,
           {headers: headers}
         )
           .subscribe(accessToken => {
-            this.setLocalStorageItem(this.accessTokenLocalStorageKey, JSON.stringify(accessToken));
+            AuthorizationService.setLocalStorageItem(this.accessTokenLocalStorageKey, JSON.stringify(accessToken));
           });
 
         this.hasAuthenticated.next(true);
@@ -71,7 +68,7 @@ export class AuthorizationService {
   }
 
   getAccessToken(): AccessToken | null {
-    let accessToken = this.getLocalStorageItem(this.accessTokenLocalStorageKey);
+    let accessToken = AuthorizationService.getLocalStorageItem(this.accessTokenLocalStorageKey);
     return JSON.parse(<string> accessToken);
   }
 
@@ -87,11 +84,11 @@ export class AuthorizationService {
     return true;
   }
 
-  private setLocalStorageItem (key: string, value: string) {
+  private static setLocalStorageItem (key: string, value: string) {
     localStorage.setItem(key, value);
   }
 
-  private getLocalStorageItem (key: string) {
+  private static getLocalStorageItem (key: string) {
     return localStorage.getItem(key);
   }
 
