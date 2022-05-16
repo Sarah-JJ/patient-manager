@@ -17,9 +17,8 @@ export class AuthorizationService {
   }
 
   private requestAuthorizationCode(): Observable<HttpResponse<string>> {
-    console.log('request auth code method')
 
-    return this.http.get<string>('https://clare.oceaninformatics.com/npscdrb2b/authorisation/oauth2/Authorize?response\n' +
+    return this.http.get<string>(environment.apiUrlScheme + environment.apiUrlHost + '/npscdrb2b/authorisation/oauth2/Authorize?response\n' +
       '_type=code&client_id=nps.mlplus&redirect_uri=https://clare.oceaninformatics.com/npscdrb2\n' +
       'b/authorisation/oauth2/callback?device_token=ZmFlYzdmZDZhMmIyNGU1NDlkMDk4ZDMyM2Y3YmEzYWY\n' +
       '=&state=30fb55af4834416aaa2c2d4de27bfcfd',
