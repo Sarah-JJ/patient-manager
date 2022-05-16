@@ -58,6 +58,7 @@ export class AuthorizationService {
           {headers: headers}
         )
           .subscribe(accessToken => {
+            // TODO: format expiresIn to be a date before setting in local storage
             AuthorizationService.setLocalStorageItem(this.accessTokenLocalStorageKey, JSON.stringify(accessToken));
           });
 
